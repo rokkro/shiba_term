@@ -26,5 +26,5 @@ optional arguments:
   --height HEIGHT       Height of shiba to output. (Defaults to console size)
   --width WIDTH         Width shiba to output. (Defaults to console size)
   --invert, -i          If passed, invert the output colors.
-  -ar                   If passed, aspect ratio is maintained.
+  -ar                   If passed, image aspect ratio is maintained.
 ```
