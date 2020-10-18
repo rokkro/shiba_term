@@ -16,15 +16,17 @@ Requires python 3.8+
 # Args
 
 ```
-usage: shiba_console.py [-h] [--count COUNT] [--height HEIGHT] [--width WIDTH]
-                        [--invert] [-ar]
+usage: shiba_console.py [--help] [--count COUNT] [--height HEIGHT]
+                        [--width WIDTH] [--invert] [--aspect]
 
 optional arguments:
-  -h, --help            show this help message and exit
+  --help                Show this help message.
   --count COUNT, -c COUNT
                         Count of shibas to display: 1-100. (Default 1)
-  --height HEIGHT       Height of shiba to output. (Defaults to console size)
-  --width WIDTH         Width shiba to output. (Defaults to console size)
+  --height HEIGHT, -h HEIGHT
+                        Height of shiba to output. (Defaults to console size)
+  --width WIDTH, -w WIDTH
+                        Width shiba to output. (Defaults to console size)
   --invert, -i          If passed, invert the output colors.
-  -ar                   If passed, image aspect ratio is maintained.
+  --aspect, -ar         If passed, image aspect ratio is maintained.
 ```
