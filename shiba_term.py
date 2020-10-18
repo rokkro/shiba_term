@@ -62,19 +62,20 @@ def open_shiba(raw_image: Response, output_size: Tuple[int, int]) -> Image:
     return img.getdata()
 
 
-def spit_out_shiba(shiba_image: Image):
+def spit_out_shiba(shiba_image: Image, invert: bool = False):
     """
     Prints out shiba - gets pixel color of image, prints a char with that color, jumps to new line if width index hit.
     :param shiba_image: pillow image object
+    :param invert: if true, invert the colors of every pixel
     """
     width, height = shiba_image.size
     [
-        print(color(' ', fore=pixel, back=pixel), end='\n' if (index + 1) % width == 0 else '')
-        for index, pixel in enumerate(shiba_image)
+        print(color(' ', fore=pinv if invert else pixel, back=pinv if invert else pixel), end='\n' if (index + 1) % width == 0 else '')
+        for index, pixel in enumerate(shiba_image) if (pinv:= (abs(pixel[0] - 255), abs(pixel[1] - 255), abs(pixel[2] - 255)))
     ]
 
 
-def loop_all_shibas(output_size: Tuple[int, int], shiba_count: int = 1):
+def loop_all_shibas(output_size: Tuple[int, int], shiba_count: int = 1, invert: bool = False):
     """
     Main shiba summoning func.
     :param output_size: Tuple of image size (width, height), like (128, 128).
@@ -87,7 +88,7 @@ def loop_all_shibas(output_size: Tuple[int, int], shiba_count: int = 1):
     for shibaddress in urls:
         raw_shiba = summon_molten_shiba(shibaddress)
         shibimage = open_shiba(raw_shiba, output_size)
-        spit_out_shiba(shibimage)
+        spit_out_shiba(shibimage, invert)
         print()
 
 
@@ -96,9 +97,10 @@ if __name__ == '__main__':
     parser.add_argument('--count', '-c', type=int, help='Count of shibas to display: 1-100. (Default 1)', default=1)
     parser.add_argument('--height', type=int, help='Height of shiba to output. (Defaults to console size)')
     parser.add_argument('--width', type=int, help='Width shiba to output. (Defaults to console size)')
+    parser.add_argument('--invert', '-i', action='store_true', help='If passed, invert the output colors.')
 
     pargs = parser.parse_args()
     arg_width = pargs.width if pargs.width else 0
     args_height = pargs.height if pargs.height else 0
     img_size = get_img_size(arg_width, args_height)
-    loop_all_shibas(img_size, pargs.count)
+    loop_all_shibas(img_size, pargs.count, pargs.invert)
