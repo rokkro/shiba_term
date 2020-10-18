@@ -50,15 +50,19 @@ def summon_molten_shiba(shiba_url: str) -> Response:
     return raw_shiba_juice
 
 
-def open_shiba(raw_image: Response, output_size: Tuple[int, int]) -> Image:
+def open_shiba(raw_image: Response, output_size: Tuple[int, int], maintain_aspect: bool) -> Image:
     """
     Opens raw image file w/ pillow, resizes it, and returns the image object
     :param raw_image: raw image
     :param output_size: Tuple of image size (width, height), like (128, 128).
+    :param maintain_aspect: If true, the img.thumbnail method will use its aspect ratio maintaining magic.
     :return: pillow image
     """
     img = Image.open(raw_image)
-    img.thumbnail((output_size))
+    if maintain_aspect:
+        img.thumbnail((output_size))
+    else:
+        img = img.resize((output_size))
     return img.getdata()
 
 
@@ -75,12 +79,14 @@ def spit_out_shiba(shiba_image: Image, invert: bool = False):
     ]
 
 
-def loop_all_shibas(output_size: Tuple[int, int], shiba_count: int = 1, invert: bool = False):
+def loop_all_shibas(output_size: Tuple[int, int], shiba_count: int = 1,
+                    invert: bool = False, maintain_aspect: bool = True):
     """
     Main shiba summoning func.
     :param output_size: Tuple of image size (width, height), like (128, 128).
     :param shiba_count: count of shibas needed
     :param invert: if true, invert the output colors
+    :param maintain_aspect: if true, the aspect ratio will be maintained during resize, if false it wont.
     """
     if shiba_count < 1 or shiba_count > 100:
         print(f"Shiba count must be between 1 to 100. Got {shiba_count}.")
@@ -88,7 +94,7 @@ def loop_all_shibas(output_size: Tuple[int, int], shiba_count: int = 1, invert: 
     urls = get_shiba_address(shiba_count)
     for shibaddress in urls:
         raw_shiba = summon_molten_shiba(shibaddress)
-        shibimage = open_shiba(raw_shiba, output_size)
+        shibimage = open_shiba(raw_shiba, output_size, maintain_aspect)
         spit_out_shiba(shibimage, invert)
         print()
 
@@ -99,9 +105,10 @@ if __name__ == '__main__':
     parser.add_argument('--height', type=int, help='Height of shiba to output. (Defaults to console size)')
     parser.add_argument('--width', type=int, help='Width shiba to output. (Defaults to console size)')
     parser.add_argument('--invert', '-i', action='store_true', help='If passed, invert the output colors.')
+    parser.add_argument('-ar', action='store_true', help='If passed, aspect ratio be maintained.')
 
     pargs = parser.parse_args()
     arg_width = pargs.width if pargs.width else 0
     args_height = pargs.height if pargs.height else 0
     img_size = get_img_size(arg_width, args_height)
-    loop_all_shibas(img_size, pargs.count, pargs.invert)
+    loop_all_shibas(img_size, pargs.count, pargs.invert, pargs.ar)
