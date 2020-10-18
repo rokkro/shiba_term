@@ -12,6 +12,7 @@ Requires python 3.8+
 # Run it
 `python3 path/to/shiba_term.py`
 
+
 # Args
 
 ```
@@ -25,5 +26,5 @@ optional arguments:
   --height HEIGHT       Height of shiba to output. (Defaults to console size)
   --width WIDTH         Width shiba to output. (Defaults to console size)
   --invert, -i          If passed, invert the output colors.
-  -ar                   If passed, aspect ratio be maintained.
+  -ar                   If passed, aspect ratio is maintained.
 ```
