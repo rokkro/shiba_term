@@ -28,5 +28,5 @@ optional arguments:
   --width WIDTH, -w WIDTH
                         Width shiba to output. (Defaults to console size)
   --invert, -i          If passed, invert the output colors.
-  --aspect, -ar         If passed, image aspect ratio is maintained.
+  --aspect, -ar         If passed, image aspect ratio is maintained with 128x128 max resolution.
 ```
