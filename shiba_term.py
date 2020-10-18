@@ -1,7 +1,8 @@
+#!/usr/bin/python
 import argparse
 import json
 import shutil
-from typing import Tuple
+from typing import Tuple, List
 
 import requests
 from PIL import Image
@@ -25,7 +26,7 @@ def get_img_size(arg_width: int = 0, arg_height: int = 0) -> Tuple[int, int]:
     return arg_width or term_size.columns, arg_height or term_size.lines
 
 
-def get_shiba_address(shiba_count: int = 1) -> list[str]:
+def get_shiba_address(shiba_count: int = 1) -> List[str]:
     """
     Have to go to the learn the home address(es) of our shiba(s).
     Calls shiba.online API, gets URL(s) to shibas, returns it as an array.
