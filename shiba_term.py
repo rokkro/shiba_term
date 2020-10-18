@@ -74,7 +74,7 @@ def spit_out_shiba(shiba_image: Image, invert: bool = False):
     """
     width, height = shiba_image.size
     [
-        print(color(' ', back=pinv if invert else pixel, style='bright'), end='\n' if (index + 1) % width == 0 else '')
+        print(color(' ', back=pinv if invert else pixel, style='dim'), end='\n' if (index + 1) % width == 0 else '')
         for index, pixel in enumerate(shiba_image) if (pinv:= (abs(pixel[0] - 255), abs(pixel[1] - 255), abs(pixel[2] - 255)))
     ]
 
@@ -106,7 +106,7 @@ if __name__ == '__main__':
     parser.add_argument('--height', '-h', type=int, help='Height of shiba to output. (Defaults to console size)')
     parser.add_argument('--width', '-w', type=int, help='Width shiba to output. (Defaults to console size)')
     parser.add_argument('--invert', '-i', action='store_true', help='If passed, invert the output colors.')
-    parser.add_argument('--aspect', '-ar', action='store_true', help='If passed, image aspect ratio is maintained.')
+    parser.add_argument('--aspect', '-ar', action='store_true', help='If passed, image aspect ratio is maintained with 128x128 max resolution.')
 
     pargs = parser.parse_args()
     arg_width = pargs.width if pargs.width else 0
