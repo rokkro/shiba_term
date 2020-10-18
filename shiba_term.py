@@ -57,7 +57,9 @@ def open_shiba(raw_image: Response, output_size: Tuple[int, int]) -> Image:
     :param output_size: Tuple of image size (width, height), like (128, 128).
     :return: pillow image
     """
-    return Image.open(raw_image).resize(output_size).getdata()
+    img = Image.open(raw_image)
+    img.thumbnail((output_size))
+    return img.getdata()
 
 
 def spit_out_shiba(shiba_image: Image):
