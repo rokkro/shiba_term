@@ -74,7 +74,7 @@ def spit_out_shiba(shiba_image: Image, invert: bool = False):
     """
     width, height = shiba_image.size
     [
-        print(color(' ', fore=pinv if invert else pixel, back=pinv if invert else pixel), end='\n' if (index + 1) % width == 0 else '')
+        print(color(' ', back=pinv if invert else pixel, style='bright'), end='\n' if (index + 1) % width == 0 else '')
         for index, pixel in enumerate(shiba_image) if (pinv:= (abs(pixel[0] - 255), abs(pixel[1] - 255), abs(pixel[2] - 255)))
     ]
 
@@ -100,15 +100,16 @@ def loop_all_shibas(output_size: Tuple[int, int], shiba_count: int = 1,
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(add_help=False)
+    parser.add_argument('--help', action='help', help="Show this help message.")
     parser.add_argument('--count', '-c', type=int, help='Count of shibas to display: 1-100. (Default 1)', default=1)
-    parser.add_argument('--height', type=int, help='Height of shiba to output. (Defaults to console size)')
-    parser.add_argument('--width', type=int, help='Width shiba to output. (Defaults to console size)')
+    parser.add_argument('--height', '-h', type=int, help='Height of shiba to output. (Defaults to console size)')
+    parser.add_argument('--width', '-w', type=int, help='Width shiba to output. (Defaults to console size)')
     parser.add_argument('--invert', '-i', action='store_true', help='If passed, invert the output colors.')
-    parser.add_argument('-ar', action='store_true', help='If passed, aspect ratio be maintained.')
+    parser.add_argument('--aspect', '-ar', action='store_true', help='If passed, image aspect ratio is maintained.')
 
     pargs = parser.parse_args()
     arg_width = pargs.width if pargs.width else 0
     args_height = pargs.height if pargs.height else 0
     img_size = get_img_size(arg_width, args_height)
-    loop_all_shibas(img_size, pargs.count, pargs.invert, pargs.ar)
+    loop_all_shibas(img_size, pargs.count, pargs.invert, pargs.aspect)
