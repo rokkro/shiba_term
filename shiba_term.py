@@ -80,6 +80,7 @@ def loop_all_shibas(output_size: Tuple[int, int], shiba_count: int = 1, invert: 
     Main shiba summoning func.
     :param output_size: Tuple of image size (width, height), like (128, 128).
     :param shiba_count: count of shibas needed
+    :param invert: if true, invert the output colors
     """
     if shiba_count < 1 or shiba_count > 100:
         print(f"Shiba count must be between 1 to 100. Got {shiba_count}.")
