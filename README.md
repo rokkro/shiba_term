@@ -2,7 +2,8 @@
 Output a shiba to your terminal. Gets shibas from https://shibe.online/
 
 # Install dependencies
-`pip install pillow colr requests`
+Requires python 3.6+
+`pip3 install pillow colr requests`
 
 # Run it
 `python3 path/to/shiba_term.py`
