@@ -1,5 +1,8 @@
 # shiba_term
-Output a shiba to your terminal. Gets shibas from https://shibe.online/
+Output a shiba to your terminal. Gets shibas from https://shibe.online/ 
+
+![Shiba pic](/../main/shibe.png)
+
 
 # Install dependencies
 Requires python 3.6+
