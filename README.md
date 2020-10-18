@@ -16,7 +16,7 @@ Requires python 3.8+
 
 ```
 usage: shiba_console.py [-h] [--count COUNT] [--height HEIGHT] [--width WIDTH]
-                        [--invert]
+                        [--invert] [-ar]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -25,4 +25,5 @@ optional arguments:
   --height HEIGHT       Height of shiba to output. (Defaults to console size)
   --width WIDTH         Width shiba to output. (Defaults to console size)
   --invert, -i          If passed, invert the output colors.
+  -ar                   If passed, aspect ratio be maintained.
 ```
