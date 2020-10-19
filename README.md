@@ -16,7 +16,7 @@ Requires python 3.8+
 # Args
 
 ```
-usage: shiba_console.py [--help] [--count COUNT] [--height HEIGHT]
+usage: shiba_term.py [--help] [--count COUNT] [--height HEIGHT]
                         [--width WIDTH] [--invert] [--aspect]
 
 optional arguments:
