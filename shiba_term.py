@@ -74,7 +74,7 @@ def spit_out_shiba(shiba_image: Image, invert: bool = False):
     """
     width, height = shiba_image.size
     [
-        print(color(' ', back=pinv if invert else pixel, style='dim'), end='\n' if (index + 1) % width == 0 else '')
+        print(color(' ', back=pinv if invert else pixel), end='\n' if (index + 1) % width == 0 else '')
         for index, pixel in enumerate(shiba_image) if (pinv:= (abs(pixel[0] - 255), abs(pixel[1] - 255), abs(pixel[2] - 255)))
     ]
 
